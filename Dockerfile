@@ -1,7 +1,7 @@
-FROM rust:1.37-slim-stretch as cargo-build
+FROM rust:slim-bullseye as cargo-build
 
-ARG DRILL_VERSION=0.5.0
-ARG OPENSSL_VERSION=1.0.2r
+ARG DRILL_VERSION=0.7.2
+ARG OPENSSL_VERSION=1.0.2u
 
 RUN apt-get update && \
     apt-get install -y curl musl-tools make pkg-config && \
@@ -33,7 +33,7 @@ RUN cd /src && \
     RUSTFLAGS=-Clinker=musl-gcc cargo build --release --target=x86_64-unknown-linux-musl
 
 
-FROM alpine:20190707
+FROM alpine:latest
 
 COPY --from=cargo-build /src/drill/target/x86_64-unknown-linux-musl/release/drill /usr/local/bin/drill
 
