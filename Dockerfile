@@ -1,7 +1,7 @@
-FROM rust:1.37-slim-stretch as cargo-build
+FROM rust:1.39.0-slim-stretch as cargo-build
 
-ARG DRILL_VERSION=0.5.0
-ARG OPENSSL_VERSION=1.0.2r
+ARG DRILL_VERSION=0.7.1
+ARG OPENSSL_VERSION=1.0.2u
 
 RUN apt-get update && \
     apt-get install -y curl musl-tools make pkg-config && \
